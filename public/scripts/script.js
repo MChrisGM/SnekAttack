@@ -52,7 +52,7 @@ function socketFunctions() {
 
   socket.on('lobbyInfo', function (data) {
     playerInfo = data;
-    pListDiv.html("<b><u>Players(" + playerInfo.names.length + "/10): " + "</u><br><i>" + playerInfo.names.join('<br>') + "</b></i>");
+    pListDiv.html("<b><u>Players(" + playerInfo.names.length + "/5): " + "</u><br><i>" + playerInfo.names.join('<br>') + "</b></i>");
 
     otherP = [];
     for (var i = 0; i < playerInfo.ids.length; i++) {
@@ -247,17 +247,13 @@ function draw() {
   }
 }
 
-
-//   let data = {
-//     x: player.getPos().x / scale,
-//     y: player.getPos().y / scale
-//   };
-//   socket.emit('updatePosition', data);
-//   socket.emit('lobbyInfo');
-
-
 function main() {
-
+  let data = {
+    x: player.getPos().x / scale,
+    y: player.getPos().y / scale
+  };
+  socket.emit('updatePosition', data);
+  socket.emit('lobbyInfo');
 }
 
 function displayNames(players) {

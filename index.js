@@ -11,6 +11,7 @@ function listen() {
 }
 
 var bannedUnames = "";
+var maxPlayersPLobby = 5;
 
 app.use(express.static('public'));
 
@@ -159,7 +160,7 @@ setInterval(function () {
 function lobbyAvailable(lobbyid) {
     for (const [key, value] of Object.entries(lobbies)) {
         if (key == lobbyid) {
-            if (lobbies[key].players.length < 10) {
+            if (lobbies[key].players.length < maxPlayersPLobby) {
                 return true;
             }
         }
@@ -229,7 +230,7 @@ function joinLobby(pID) {
     var joined = false;
     for (const [key, value] of Object.entries(lobbies)) {
         // console.log(`${key}: ${value}`);
-        if (lobbies[key].players.length < 10 && lobbies[key].settings.private != true) {
+        if (lobbies[key].players.length < maxPlayersPLobby && lobbies[key].settings.private != true) {
             if (!(lobbies[key].players.includes(pID))) {
                 lobbies[key].players.push(pID);
             }
